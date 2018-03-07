@@ -24,6 +24,7 @@ import { AdminOrdersComponent } from './admin/admin-orders/admin-orders.componen
 import { UserService } from './user.service';
 import { AdminAuthGuard } from './admin-auth-guard.service';
 import { ProductFormComponent } from './admin/product-form/product-form.component';
+import { CategoryService } from './category.service';
 
 
 
@@ -80,6 +81,7 @@ import { ProductFormComponent } from './admin/product-form/product-form.componen
     AuthGuard, 
     AdminAuthGuard,
     UserService,
+    CategoryService
   ],
   bootstrap: [AppComponent]
 })
