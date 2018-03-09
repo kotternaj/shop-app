@@ -1,8 +1,9 @@
 import { ProductService } from '../../product.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { Observable } from 'rxjs/observable';
+
 import { Subscription } from 'rxjs/Subscription';
 import { Product } from '../../models/product';
+import { DataTableResource } from 'angular5-data-table';
 
 
 @Component({
@@ -14,6 +15,7 @@ export class AdminProductsComponent implements OnInit, OnDestroy {
   products: Product[];
   filteredProducts: any[];
   subscription: Subscription;
+  tableResource: DataTableResource<Product>;
   
   constructor(private productService: ProductService) { 
     this.subscription = this.productService.getAll()
