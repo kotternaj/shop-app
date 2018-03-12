@@ -1,3 +1,4 @@
+import { ShoppingCartService } from './../shopping-cart.service';
 import { Product } from './../models/product';
 import { ActivatedRoute } from '@angular/router';
 import { ProductService } from './../product.service';
@@ -17,7 +18,9 @@ export class ProductsComponent  {
   constructor(
     route: ActivatedRoute,    
     productService: ProductService
+    // shoppingCartService: ShoppingCartService
   ) {
+    // shoppingCartService.
     productService
       .getAll()
       .switchMap(products => {
