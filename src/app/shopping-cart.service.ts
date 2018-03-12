@@ -7,8 +7,7 @@ import 'rxjs/add/operator/take'
 export class ShoppingCartService {
 
   productService: any;
-  constructor(private db: AngularFireDatabase
-    ) { }
+  constructor(private db: AngularFireDatabase) { }
   
   create(){
     return this.db.list('shopping-carts').push({
@@ -18,6 +17,9 @@ export class ShoppingCartService {
   private getCart() {
     let cartId = this.getOrCreateCartId();
     return this.db.object('/shopping-carts/' + cartId);
+  }
+  private getItem(cartId: string, productId: string){
+    return this.db.object('shopping-carts/' + cartId + '/items/' + productId) 
   }
   private async getOrCreateCartId(){
     let cartId = localStorage.getItem('cartId');
@@ -30,10 +32,9 @@ export class ShoppingCartService {
 
   async addToCart(product: Product) {
     let cartId = await this.getOrCreateCartId();
-    let item$ = this.db.object('shopping-carts/' + cartId + '/items/' + product.$key)    
+    let item$ = this.getItem(cartId, product.$key);   
     item$.take(1).subscribe(item=> {
-      if (item.$exists()) item$.update({ quantity: item.quantity + 1 });
-      else item$.set({ products: product, quantity: 1});
+      item$.update({ products: product, quantity: (item.quantity || 0) + 1 });      
     });
   }
 }
