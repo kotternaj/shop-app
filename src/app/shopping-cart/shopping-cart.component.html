@@ -7,8 +7,8 @@
       <thead>
         <tr>
           <th>Product</th>
-          <th>Quantity</th>
-          <th>Price</th>
+          <th class="text-center" style="width: 230px">Quantity</th>
+          <th class="text-right" style="width: 200px">Price</th>
         </tr>
       </thead>
       <tbody>
@@ -16,14 +16,21 @@
           <td>
             {{ item.products.title }}
           </td>
-          <td>
+          <td class="text-center">
             {{ item.quantity }}
           </td>
-          <td>
-            {{ cart.totalPrice }}
+          <td class="text-right">
+            {{ item.totalPrice | currency:'USD': true }}
           </td>
         </tr>
       </tbody>
+      <tfoot>
+        <tr>
+          <th></th>
+          <th></th>
+          <th>{{ cart.totalPrice | currency:'USD': true }}</th>
+        </tr>
+      </tfoot>
     </table>
 </ng-container>
 
